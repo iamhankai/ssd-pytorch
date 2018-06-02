@@ -14,7 +14,7 @@ import torch.utils.data as data
 import numpy as np
 import argparse
 import ssd
-from multibox_loss import MultiBoxLoss
+from ssd import MultiBoxLoss
 
 def str2bool(v):
     return v.lower() in ("yes", "true", "t", "1")
@@ -86,8 +86,7 @@ def train():
     else:
         vgg_weights = torch.load(args.save_folder + args.basenet)
         print('Loading base network...')
-        #ssd_net.features.load_state_dict(vgg_weights)
-        #ssd_net.vgg.load_state_dict(vgg_weights)
+        ssd_net.features.load_state_dict(vgg_weights)
 
     if args.cuda:
         net = net.cuda()
